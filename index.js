@@ -52,50 +52,54 @@ const editor = grapesjs.init({
     
   },
 
-  StyleManger: {
-    appendTo: ".styles-container",
-    sectors: [
-      {
-        name: "Dimension",
+  selectorManager: {
+    appendTo: '.styles-container'
+  },
+
+ 
+  styleManager: {
+    appendTo: '.styles-container',
+    sectors: [{
+        name: 'Dimension',
         open: false,
-        buildProps: ["width", "min-height", "padding"],
+        // Use built-in properties
+        buildProps: ['width', 'min-height', 'padding'],
+        // Use `properties` to define/override single property
         properties: [
           {
-            type: "integer",
-            name: "The width",
-            property: "width",
-            units: ["px", "%"],
-            defaults: "auto",
-            min: 0,
-          },
+            // Type of the input,
+            // options: integer | radio | select | color | slider | file | composite | stack
+            type: 'integer',
+            name: 'The width', // Label for the property
+            property: 'width', // CSS property (if buildProps contains it will be extended)
+            units: ['px', '%'], // Units, available only for 'integer' types
+            defaults: 'auto', // Default value
+            min: 0, // Min value, available only for 'integer' types
+          }
+        ]
+      },{
+        name: 'Extra',
+        open: false,
+        buildProps: ['background-color', 'box-shadow', 'custom-prop'],
+        properties: [
           {
-            name: "Extra",
-            open: false,
-            buildProps: ["background-color", "box-shadow", "custom-prop"],
-            properties: [
-              {
-                id: "custom-prop",
-                name: "Custom Label",
-                property: "font-size",
-                type: "select",
-                defaults: "32px",
-                options: [
-                  { value: "12px", name: "Tiny" },
-                  { value: "18px", name: "Medium" },
-                  { value: "32px", name: "Big" },
-                ],
-              },
+            id: 'custom-prop',
+            name: 'Custom Label',
+            property: 'font-size',
+            type: 'select',
+            defaults: '32px',
+            // List of options, available only for 'select' and 'radio'  types
+            options: [
+              { value: '12px', name: 'Tiny' },
+              { value: '18px', name: 'Medium' },
+              { value: '32px', name: 'Big' },
             ],
-          },
-        ],
-      },
-    ],
+         }
+        ]
+      }]
   },
 
-  selectorManager: {
-    appendTo: ".styles-container",
-  },
-
+  
   layerManager: {
     appendTo: ".layers-container",
   },
@@ -144,10 +148,14 @@ editor.Panels.addPanel({
 
 editor.BlockManager.add('Heading', {
   label: 'Heading',
-  category: 'Typography',
-  content: `<section>
-        <h1 style="">paragraph</h1>
-        </section>`
+  category: {
+    id: 'Typography',
+    label: 'Typography',
+    open: false,
+  },
+  content: `<span>
+        <h1 style="">Heading</h1>
+        </span>`,
 })
 
 editor.BlockManager.add('Paragraph', {
@@ -160,14 +168,20 @@ editor.BlockManager.add('Paragraph', {
 
 editor.BlockManager.add('Image', {
   label: 'Image',
-  category: 'Media',
-  content: {type:'image'}
+  category: {
+    id: 'Media',
+    label: 'Media',
+    open: false,
+  },
+  content: {type:'image'},
+  activate: true,
 })
 
 editor.BlockManager.add('Video', {
   label: 'Video',
   category: 'Media',
-  content: {type:'video'}
+  content: {type:'video'},
+  activate: true,
 })
 
 editor.BlockManager.add('Audio', {
@@ -184,7 +198,11 @@ editor.BlockManager.add('Audio', {
 
 editor.BlockManager.add('Navbar', {
   label: 'Navbar',
-  category: 'Navigation',
+  category: {
+    id: 'Navigation',
+    label: 'Navigation',
+    open: false,
+  },
   content: `
   <nav class="navbar navbar-expand-sm bg-light">
 
@@ -216,43 +234,40 @@ editor.BlockManager.add('Button', {
 
 editor.BlockManager.add('Map', {
   label: 'Map',
-  category: 'Other',
-  content: {type:'map'}
+  category: {
+    id: 'Other',
+    label: 'Other',
+    open: false,
+  },
+  content: {type:'map'},
+  active: true,
 })
 
 
 
-editor.Commands.add("show-layers", {
-  getRowEl(editor) {
-    return editor.getContainer().closest(".editor-row");
-  },
-  getLayersEl(row) {
-    return row.querySelector(".layers-container");
-  },
+editor.Commands.add('show-layers', {
+  getRowEl(editor) { return editor.getContainer().closest('.editor-row'); },
+  getLayersEl(row) { return row.querySelector('.layers-container') },
 
   run(editor, sender) {
     const lmEl = this.getLayersEl(this.getRowEl(editor));
-    lmEl.style.display = "";
+    lmEl.style.display = '';
   },
   stop(editor, sender) {
     const lmEl = this.getLayersEl(this.getRowEl(editor));
-    lmEl.style.display = "none";
+    lmEl.style.display = 'none';
   },
 });
-editor.Commands.add("show-styles", {
-  getRowEl(editor) {
-    return editor.getContainer().closest(".editor-row");
-  },
-  getStyleEl(row) {
-    return row.querySelector(".styles-container");
-  },
+editor.Commands.add('show-styles', {
+  getRowEl(editor) { return editor.getContainer().closest('.editor-row'); },
+  getStyleEl(row) { return row.querySelector('.styles-container') },
 
   run(editor, sender) {
     const smEl = this.getStyleEl(this.getRowEl(editor));
-    smEl.style.display = "";
+    smEl.style.display = '';
   },
   stop(editor, sender) {
     const smEl = this.getStyleEl(this.getRowEl(editor));
-    smEl.style.display = "none";
+    smEl.style.display = 'none';
   },
 });
