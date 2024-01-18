@@ -13,7 +13,6 @@ body {
 }
 
 .gjs-block {
-    width: 150px;
     height: 50px;
     min-height: auto;
   }
