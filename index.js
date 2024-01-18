@@ -36,14 +36,14 @@ const editor = grapesjs.init({
         buttons: [{
             id: 'show-layers',
             active: true,
-            label: 'Layers',
+            label: `<i class="bi bi-layers"></i>`,
             command: 'show-layers',
             // Once activated disable the possibility to turn it off
             togglable: false,
           }, {
             id: 'show-style',
             active: true,
-            label: 'Styles',
+            label: `<i class="bi bi-filetype-css"></i>`,
             command: 'show-styles',
             togglable: false,
         }],
