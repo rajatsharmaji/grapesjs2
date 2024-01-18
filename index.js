@@ -1,7 +1,7 @@
 const editor = grapesjs.init({
   container: "#gjs",
   fromElement: false,
-  components: '<h1 style="text-align: center; color: saddlebrown">Code the Future!</h1>',
+  components: '<h1 style="text-align: center; color: saddlebrown">Welcome!</h1>',
   // attributes: { "some-attribute": "some-value" },
   height: "100vh",
   width: "auto",
