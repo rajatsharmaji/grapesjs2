@@ -18,18 +18,23 @@
     <script src="//unpkg.com/grapesjs"></script>
   </head>
   <body>
-    <div class="panel__top">
-      <div class="panel__basic-actions"></div>
-    </div>
-
-    <div class="row bg-light">
-      <div class="col-sm-1 p-3 bg-secondary">
-        <div id="blocks"></div>
+    <div class="container-fluid">
+      <div class="panel__top">
+        <div class="panel__basic-actions"></div>
       </div>
 
-      <div class="col-sm-11 p-3 bg-secondary">
-        <div id="gjs">
-          <p class="text-primary">hello world</p>
+      <div class="row bg-light">
+        <div class="col-sm-1 p-3 bg-secondary">
+          <div id="blocks"></div>
+        </div>
+
+        <div class="col editor-row">
+          <div class="editor-canvas">
+            <div id="gjs">...</div>
+          </div>
+          <div class="panel__right">
+            <div class="layers-container"></div>
+          </div>
         </div>
       </div>
     </div>

@@ -29,38 +29,20 @@ const editor = grapesjs.init({
             select: true,
             content: {type : 'image'}
           },
-          {
-            id: 'modal',
-            label: 'modal',
-            content: `
-            <div class="spinner-border text-muted"></div>
-            `
-          }
         ]
       },
+
+      layerManager: {
+        appendTo: '.layers-container'
+      },
+
+      panels: {
+        defaults: [{
+          id: 'layers',
+          el: '.panel__right',
+        }]
+      }
 })
-
-
-editor.blockManager.add('heading',{
-     label: 'heading',
-     category: 'heading',
-     content: {
-        tagName: 'div',
-        draggable: false,
-        attributes: { 'some-attribute': 'some-value' },
-        components: [
-          {
-            tagName: 'span',
-            content: '<b>Some static content</b>',
-          }, {
-            tagName: 'div',
-            // use `content` for static strings, `components` string will be parsed
-            // and transformed in Components
-            components: '<span>HTML at some point</span>',
-          }
-        ]
-    }
-    })
 
     editor.Panels.addPanel({
         id: 'panel-top',
