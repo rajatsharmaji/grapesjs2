@@ -1,9 +1,13 @@
+body { 
+  background-color:	#454545
+  }
+
 #gjs{
-    border: 3px solid #444;
+    border: 3px solid #383737;
 }
 
 .gjs-cv-canvas{
-    /* top: 0; */
+    top: 0;
     width: 100%;
     height: 100%;
 }
@@ -26,4 +30,20 @@
     position: initial;
   }
 
-  
+  .editor-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  height: 300px;
+}
+
+.editor-canvas {
+  flex-grow: 1;
+}
+
+.panel__right {
+  flex-basis: 230px;
+  position: relative;
+  overflow-y: auto;
+}

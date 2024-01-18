@@ -29,15 +29,19 @@ const editor = grapesjs.init({
             select: true,
             content: {type : 'image'}
           },
-          {
-            id: 'modal',
-            label: 'modal',
-            content: `
-            <div class="spinner-border text-muted"></div>
-            `
-          }
         ]
       },
+
+      layerManager: {
+        appendTo: '.layers-container'
+      },
+
+      panels: {
+        defaults: [{
+          id: 'layers',
+          el: '.panel__right',
+        }]
+      }
 })
 
     editor.Panels.addPanel({
