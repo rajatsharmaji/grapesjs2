@@ -47,3 +47,16 @@ body {
   position: relative;
   overflow-y: auto;
 }
+
+.panel__switcher {
+  position: initial;
+}
+
+.bg-light{
+  --bs-bg-opacity: 0;
+}
+
+.row>* {
+  padding-right: 0;
+  padding-left: 0;
+}
