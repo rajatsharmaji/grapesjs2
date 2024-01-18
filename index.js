@@ -1,76 +1,21 @@
 const editor = grapesjs.init({
   container: "#gjs",
-  fromElement: true,
-  attributes: { "some-attribute": "some-value" },
-  height: "600px",
+  fromElement: false,
+  components: '<h1 style="text-align: center; color: saddlebrown">Code the Future!</h1>',
+  // attributes: { "some-attribute": "some-value" },
+  height: "100vh",
   width: "auto",
   storageManager: false,
   panels: { defaults: [] },
 
   blockManager: {
     appendTo: "#blocks",
-    blocks: [
-      {
-        id: "heading",
-        label: `<b>heading</b>`,
-        content: `<section>
-               <h1 style="text-align: center; color:saddlebrown;">Heading</h1>
-            </section>`,
-      },
-      {
-        id: "text",
-        label: "text",
-        content: `<section>
-            <p style="">paragraph</p>
-            </section>`,
-      },
-      {
-        id: "images",
-        label: "images",
-        select: true,
-        content: { type: "image" },
-      },
-      {
-        id: "videos",
-        label: "videos",
-        select: true,
-        content: { type: "video" },
-      },
-      {
-        id: "map",
-        label: "map",
-        select: true,
-        content: { type: "map" },
-      },
-      {
-        id: "button",
-        label: "button",
-        select: true,
-        content: `
-            <button type="button" class="btn">Button</button>
-            `,
-      },
-      {
-        id: "audio",
-        label: "audio",
-        select: true,
-        content: `
-            <audio controls>
-               <source src="" type="audio/ogg">
-               <source src="" type="audio/mpeg">
-               Your browser does not support the audio tag.
-            </audio>
-            `,
-      },
-    ],
-  },
-
-  layerManager: {
-    appendTo: ".layers-container",
   },
 
   panels: {
+    
     defaults: [
+
       {
         id: "layers",
         el: ".panel__right",
@@ -84,30 +29,27 @@ const editor = grapesjs.init({
           bc: 0, // Bottom handler
           keyWidth: "flex-basis",
         },
-        id: "panel__switcher",
-        element: ".panel__switcher",
-        buttons: [
-          {
-            id: "show-layers",
-            active: true,
-            label: "Layers",
-            command: "show-layers",
-            togglable: false,
-          },
-          {
-            id: "show-styles",
-            active: true,
-            label: "Style",
-            command: "show-styles",
-            togglable: false,
-          },
-        ],
       },
+      {
+        id: 'panel-switcher',
+        el: '.panel__switcher',
+        buttons: [{
+            id: 'show-layers',
+            active: true,
+            label: 'Layers',
+            command: 'show-layers',
+            // Once activated disable the possibility to turn it off
+            togglable: false,
+          }, {
+            id: 'show-style',
+            active: true,
+            label: 'Styles',
+            command: 'show-styles',
+            togglable: false,
+        }],
+      }
     ],
-  },
-
-  selectorManager: {
-    appendTo: ".styles-container",
+    
   },
 
   StyleManger: {
@@ -149,6 +91,14 @@ const editor = grapesjs.init({
       },
     ],
   },
+
+  selectorManager: {
+    appendTo: ".styles-container",
+  },
+
+  layerManager: {
+    appendTo: ".layers-container",
+  },
 });
 
 editor.Panels.addPanel({
@@ -163,20 +113,20 @@ editor.Panels.addPanel({
       id: "visibility",
       active: true, // active by default
       className: "btn-toggle-borders",
-      label: "<u>B</u>",
+      label: `<i class="bi bi-lightbulb"></i>`,
       command: "sw-visibility", // Built-in command
     },
     {
       id: "export",
       className: "btn-open-export",
-      label: "Exp",
+      label: `<i class="bi bi-download"></i>`,
       command: "export-template",
       context: "export-template", // For grouping context of buttons from the same panel
     },
     {
       id: "show-json",
       className: "btn-show-json",
-      label: "JSON",
+      label: `<i class="bi bi-code"></i>`,
       context: "show-json",
       command(editor) {
         editor.Modal.setTitle("Components JSON")
@@ -190,6 +140,87 @@ editor.Panels.addPanel({
     },
   ],
 });
+
+
+editor.BlockManager.add('Heading', {
+  label: 'Heading',
+  category: 'Typography',
+  content: `<section>
+        <h1 style="">paragraph</h1>
+        </section>`
+})
+
+editor.BlockManager.add('Paragraph', {
+  label: 'paragraph',
+  category: 'Typography',
+  content: `<section>
+        <p style="">paragraph</p>
+        </section>`
+})
+
+editor.BlockManager.add('Image', {
+  label: 'Image',
+  category: 'Media',
+  content: {type:'image'}
+})
+
+editor.BlockManager.add('Video', {
+  label: 'Video',
+  category: 'Media',
+  content: {type:'video'}
+})
+
+editor.BlockManager.add('Audio', {
+  label: 'Audio',
+  category: 'Media',
+  content: `
+            <audio controls>
+               <source src="" type="audio/ogg">
+               <source src="" type="audio/mpeg">
+               Your browser does not support the audio tag.
+            </audio>
+            `,
+})
+
+editor.BlockManager.add('Navbar', {
+  label: 'Navbar',
+  category: 'Navigation',
+  content: `
+  <nav class="navbar navbar-expand-sm bg-light">
+
+<div class="container-fluid">
+<!-- Links -->
+<ul class="navbar-nav">
+<li class="nav-item">
+  <a class="nav-link" href="#">Link 1</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="#">Link 2</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="#">Link 3</a>
+</li>
+</ul>
+</div>
+
+</nav>`
+})
+
+editor.BlockManager.add('Button', {
+  label: 'Button',
+  category: 'Navigation',
+  content: `
+  <button type="button" class="btn">Button</button>
+  `,
+})
+
+editor.BlockManager.add('Map', {
+  label: 'Map',
+  category: 'Other',
+  content: {type:'map'}
+})
+
+
 
 editor.Commands.add("show-layers", {
   getRowEl(editor) {
