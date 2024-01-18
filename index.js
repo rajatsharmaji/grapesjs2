@@ -1,6 +1,7 @@
 const editor = grapesjs.init({
     container: '#gjs',
     fromElement: true,
+    attributes: { 'some-attribute': 'some-value' },
     height:'600px',
     width: 'auto',
     storageManager: false,
@@ -56,12 +57,21 @@ const editor = grapesjs.init({
         appendTo: '.layers-container'
       },
 
+
       panels: {
         defaults: [{
           id: 'layers',
           el: '.panel__right',
-        },
-        {
+          // Make the panel resizable
+          resizable: {
+            maxDim: 350,
+            minDim: 200,
+            tc: 0, // Top handler
+            cl: 1, // Left handler
+            cr: 0, // Right handler
+            bc: 0, // Bottom handler
+            keyWidth: 'flex-basis',
+          },
           id: 'panel__switcher',
           element: '.panel__switcher',
           buttons: [
@@ -78,11 +88,11 @@ const editor = grapesjs.init({
               label: 'Style',
               command: 'show-styles',
               togglable: false,
-            }
-          ]
-        }
-      ]
+            }],
+          }
+        ]
       },
+
       selectorManager: {
         appendTo: '.styles-container'
       },
