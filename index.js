@@ -232,6 +232,38 @@ editor.BlockManager.add('Button', {
   `,
 })
 
+editor.BlockManager.add('table', {
+  label: 'table',
+  category:{
+    id: 'table',
+    label: 'table',
+    open: false,
+  },
+  content: {type:'table'},
+  active: true,
+})
+
+editor.BlockManager.add('thead', {
+  label: 'thead',
+  category:'table',
+  content: {type:'thead'},
+  active: true,
+})
+
+editor.BlockManager.add('tbody', {
+  label: 'tbody',
+  category:'table',
+  content: {type:'tbody'},
+  active: true,
+})
+
+editor.BlockManager.add('tfoot', {
+  label: 'tfoot',
+  category:'table',
+  content: {type:'tfoot'},
+  active: true,
+})
+
 editor.BlockManager.add('Map', {
   label: 'Map',
   category: {
@@ -243,6 +275,12 @@ editor.BlockManager.add('Map', {
   active: true,
 })
 
+editor.BlockManager.add('svg', {
+  label: 'svg',
+  category:'Other',
+  content: {type:'svg'},
+  active: true,
+})
 
 
 editor.Commands.add('show-layers', {
